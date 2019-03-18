@@ -1,3 +1,9 @@
+[Home](https://mgcodesandstats.github.io/) |
+[Time Series Consulting](https://mgcodesandstats.github.io/timeseriesconsulting/) |
+[Portfolio](https://mgcodesandstats.github.io/portfolio/) |
+[Terms and Conditions](https://mgcodesandstats.github.io/terms/) |
+[E-mail me](mailto:michael@michaeljgrogan.com)
+
 A neural network is a computational system that creates predictions based on existing data. Let us train and test a neural network using the neuralnet library in R.
 
 How To Construct A Neural Network?
