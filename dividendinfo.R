@@ -1,4 +1,4 @@
-mydata <- read.csv("/media/veracrypt9/a_documents/group b/computing/data science/datasets/dividendinfo.csv")
+mydata <- read.csv("directory/dividendinfo.csv")
 attach(mydata)
 
 #Scaled Normalization
