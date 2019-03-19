@@ -1,5 +1,5 @@
 #1. SET DIRECTORY AND FILE PATH
-setwd("/media/veracrypt9/a_documents/group b/computing/data science/datasets")
+setwd("directory")
 fullData <- read.csv("gasoline.csv")
 attach(fullData)
 fullData<-data.frame(consumption, capacity, gasoline, hours)
