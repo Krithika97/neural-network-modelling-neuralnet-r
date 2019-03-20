@@ -4,9 +4,11 @@
 [Terms and Conditions](https://mgcodesandstats.github.io/terms/) |
 [E-mail me](mailto:michael@michaeljgrogan.com)
 
+# neuralnet: Train and Test Neural Networks Using R
+
 A neural network is a computational system that creates predictions based on existing data. Let us train and test a neural network using the neuralnet library in R.
 
-How To Construct A Neural Network?
+## How To Construct A Neural Network?
 
 A neural network consists of:
 
@@ -15,7 +17,8 @@ A neural network consists of:
 - Output layers: Output of predictions based on the data from the input and hidden layers
 
 neuralnet
-Solving classification problems with neuralnet
+
+## Solving classification problems with neuralnet
 
 In this particular example, our goal is to develop a neural network to determine if a stock pays a dividend or not.
 
@@ -40,7 +43,8 @@ mydata <- read.csv("dividendinfo.csv")
 attach(mydata)
 ```
 Let's now take a look at the steps we will follow in constructing this model.
-Data Normalization
+
+### Data Normalization
 
 One of the most important procedures when forming a neural network is data normalization. This involves adjusting the data to a common scale so as to accurately compare predicted and actual values. Failure to normalize the data will typically result in the prediction value remaining the same across all observations, regardless of the input values.
 
@@ -51,11 +55,13 @@ We can do this in two ways in R:
 
 We implement both techniques below but choose to use the max-min normalization technique. Please see this useful link for further details on how to use the normalization function.
 
-Scaled Normalization
+### Scaled Normalization
+
 ```
 scaleddata<-scale(mydata)
 ```
-Max-Min Normalization
+
+### Max-Min Normalization
 
 For this method, we invoke the following function to normalize our data:
 ```
@@ -77,7 +83,8 @@ We base our training data (trainset) on 80% of the observations. The test data (
 trainset <- maxmindf[1:160, ]
 testset <- maxmindf[161:200, ]
 ```
-Training a Neural Network Model using neuralnet
+
+### Training a Neural Network Model using neuralnet
 
 We now load the neuralnet library into R.
 
@@ -129,16 +136,18 @@ Intercept.to.2layhid1         2.991704593713
 Intercept.to.dividend        -5.673537382132
 2layhid.1.to.dividend        17.963989719804
 ```
-Testing The Accuracy Of The Model
+
+### Testing The Accuracy Of The Model
 
 As already mentioned, our neural network has been created using the training data. We then compare this to the test data to gauge the accuracy of the neural network forecast.
 
 In the below:
 
-    The "subset" function is used to eliminate the dependent variable from the test data
-    The "compute" function then creates the prediction variable
-    A "results" variable then compares the predicted data with the actual data
-    A confusion matrix is then created with the table function to compare the number of true/false positives and negatives
+- The "subset" function is used to eliminate the dependent variable from the test data
+- The "compute" function then creates the prediction variable
+- A "results" variable then compares the predicted data with the actual data
+- A confusion matrix is then created with the table function to compare the number of true/false positives and negatives
+
 ```
 #Test the resulting output
 temp_test <- subset(testset, select = c("fcfps","earnings_growth", "de", "mcap", "current_ratio"))
@@ -159,7 +168,8 @@ The predicted results are compared to the actual results:
 199      0 0.003427332586
 200      1 0.999985252611
 ```
-Confusion Matrix
+
+### Confusion Matrix
 
 Then, we round up our results using sapply and create a confusion matrix to compare the number of true/false positives and negatives:
 ```
@@ -176,7 +186,8 @@ actual  0  1
      1  3 20
 ```
 Ultimately, we yield an 92.5% (37/40) accuracy rate in determining whether a stock pays a dividend or not.
-Solving regression problems using neuralnet
+
+## Solving regression problems using neuralnet
 
 We have already seen how a neural network can be used to solve classification problems by attempting to group data based on its attributes. However, what if we wish to solve a regression problem using a neural network? i.e. one where the dependent variable is an interval one and can take on a wide range of values?
 
@@ -186,12 +197,12 @@ Essentially, we wish to determine the gasoline spend per year (in $) for a parti
 
 Accordingly, our variables are as follows:
 
-    consumption: Spend (in $) on gasoline per year for a particular vehicle
-    capacity: Capacity of the vehicle's fuel tank (in litres)
-    gasoline: Average cost of gasoline per pump
-    hours: Hours driven per year by owner
+- consumption: Spend (in $) on gasoline per year for a particular vehicle
+- capacity: Capacity of the vehicle's fuel tank (in litres)
+- gasoline: Average cost of gasoline per pump
+- hours: Hours driven per year by owner
 
-Data Normalization
+### Data Normalization
 
 Again, we normalize our data and split into training and test data:
 ```
@@ -205,7 +216,8 @@ Again, we normalize our data and split into training and test data:
 > trainset <- maxmindf[1:32, ]
 > testset <- maxmindf[33:40, ]
 ```
-Neural Network Output
+
+### Neural Network Output
 
 We then run our neural network and generate our parameters:
 ```
@@ -231,11 +243,12 @@ Intercept.to.2layhid1    -1.125920206855
 Intercept.to.consumption  0.683726702522
 2layhid.1.to.consumption -0.545431580477
 ```
-Generated Neural Network
+
+### Generated Neural Network
 
 Here is what our neural network looks like in visual format:
 
-Model Validation
+### Model Validation
 
 Then, we validate (or test the accuracy of our model) by comparing the estimated gasoline spend yielded from the neural network to the actual spend as reported in the test output:
 ```
@@ -251,7 +264,8 @@ Then, we validate (or test the accuracy of our model) by comparing the estimated
 39 0.9124866596 0.6649999344
 40 1.0000000000 0.6665075920
 ```
-Accuracy
+
+### Accuracy
 
 In the below code, we are then converting the data back to its original format, and yielding an accuracy of 90% on a mean absolute deviation basis (i.e. the average deviation between estimated and actual gasoline consumption stands at a mean of 10%). Note that we are also converting our data back into standard values given that they were previously scaled using the max-min normalization technique:
 ```
@@ -332,7 +346,8 @@ Intercept.to.consumption   0.921627990820
 [1] 0.9577401232
 ```
 We see that our accuracy rate has now increased to nearly 96%, indicating that modifying the number of hidden nodes has enhanced our model!
-Conclusion
+
+## Conclusion
 
 In this tutorial, you have learned how to use a neural network to solve classification problems.
 
