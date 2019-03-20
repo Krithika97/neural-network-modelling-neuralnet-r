@@ -16,7 +16,7 @@ A neural network consists of:
 - Hidden layers: Layers that use backpropagation to optimise the weights of the input variables in order to improve the predictive power of the model
 - Output layers: Output of predictions based on the data from the input and hidden layers
 
-neuralnet
+![neuralplot](neuralplot.png)
 
 ## Solving classification problems with neuralnet
 
@@ -28,20 +28,22 @@ In our dataset, we assign a value of 1 to a stock that pays a dividend. We assig
 
 Our independent variables are as follows:
 
-    fcfps: Free cash flow per share (in $)
-    earnings_growth: Earnings growth in the past year (in %)
-    de: Debt to Equity ratio
-    mcap: Market Capitalization of the stock
-    current_ratio: Current Ratio (or Current Assets/Current Liabilities)
+- fcfps: Free cash flow per share (in $)
+- earnings_growth: Earnings growth in the past year (in %)
+- de: Debt to Equity ratio
+- mcap: Market Capitalization of the stock
+- current_ratio: Current Ratio (or Current Assets/Current Liabilities)
 
 The dataset for this example is available at dividendinfo.csv.
 
 We firstly set our directory and load the data into the R environment:
+
 ```
 setwd("your directory")
 mydata <- read.csv("dividendinfo.csv")
 attach(mydata)
 ```
+
 Let's now take a look at the steps we will follow in constructing this model.
 
 ### Data Normalization
@@ -50,8 +52,8 @@ One of the most important procedures when forming a neural network is data norma
 
 We can do this in two ways in R:
 
-    Scale the data frame automatically using the scale function in R
-    Transform the data using a max-min normalization technique
+- Scale the data frame automatically using the scale function in R
+- Transform the data using a max-min normalization technique
 
 We implement both techniques below but choose to use the max-min normalization technique. Please see this useful link for further details on how to use the normalization function.
 
@@ -64,18 +66,22 @@ scaleddata<-scale(mydata)
 ### Max-Min Normalization
 
 For this method, we invoke the following function to normalize our data:
+
 ```
 normalize <- function(x) {
   return ((x - min(x)) / (max(x) - min(x)))
 }
 ```
+
 Then, we use lapply to run the function across our existing data (we have termed the dataset loaded into R as mydata):
 
+```
 maxmindf <- as.data.frame(lapply(mydata, normalize))
+```
 
 We have now scaled our new dataset and saved it into a data frame titled maxmindf:
 
-neural
+![maxmindf](maxmindf.png)
 
 We base our training data (trainset) on 80% of the observations. The test data (testset) is based on the remaining 20% of observations.
 ```
@@ -109,7 +115,7 @@ plot(nn)
 ```
 Our neural network looks like this:
 
-neural
+![neuraldividends](neuraldividends.png)
 
 We now generate the error of the neural network model, along with the weights between the inputs, hidden layers, and outputs:
 ```
@@ -248,6 +254,8 @@ Intercept.to.consumption  0.683726702522
 
 Here is what our neural network looks like in visual format:
 
+![2-1-1](2-1-1.png)
+
 ### Model Validation
 
 Then, we validate (or test the accuracy of our model) by comparing the estimated gasoline spend yielded from the neural network to the actual spend as reported in the test output:
@@ -323,7 +331,11 @@ Intercept.to.2layhid2      0.353976458576
 Intercept.to.consumption   0.921627990820
 2layhid.1.to.consumption  -0.524918897571
 2layhid.2.to.consumption  -0.669503028647
+```
 
+![5-2](5-2.png)
+
+```
 > results <- data.frame(actual = testset$consumption, prediction = nn.results$net.result)
 > results
          actual   prediction
@@ -345,7 +357,7 @@ Intercept.to.consumption   0.921627990820
 > accuracy
 [1] 0.9577401232
 ```
-We see that our accuracy rate has now increased to nearly 96%, indicating that modifying the number of hidden nodes has enhanced our model!
+We see that our accuracy rate has now increased to nearly 96%, indicating that modifying the number of hidden nodes has enhanced our model.
 
 ## Conclusion
 
@@ -356,5 +368,3 @@ Specifically, you saw how we can:
 - Classify data using a neural network
 - Test accuracy using a confusion matrix
 - Determine accuracy when the dependent variable is in interval format
-
-Many thanks for your time!
