@@ -352,10 +352,9 @@ We see that our accuracy rate has now increased to nearly 96%, indicating that m
 In this tutorial, you have learned how to use a neural network to solve classification problems.
 
 Specifically, you saw how we can:
-
-    Normalize data for meaningful analysis
-    Classify data using a neural network
-    Test accuracy using a confusion matrix
-    Determine accuracy when the dependent variable is in interval format
+- Normalize data for meaningful analysis
+- Classify data using a neural network
+- Test accuracy using a confusion matrix
+- Determine accuracy when the dependent variable is in interval format
 
 Many thanks for your time!
