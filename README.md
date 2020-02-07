@@ -81,7 +81,7 @@ maxmindf <- as.data.frame(lapply(mydata, normalize))
 
 We have now scaled our new dataset and saved it into a data frame titled maxmindf:
 
-![maxmindf](maxmindf.png)
+![maxmindf](maxmindf.jpg)
 
 We base our training data (trainset) on 80% of the observations. The test data (testset) is based on the remaining 20% of observations.
 ```
