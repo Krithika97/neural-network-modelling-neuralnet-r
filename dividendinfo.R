@@ -12,9 +12,9 @@ normalize <- function(x) {
 maxmindf <- as.data.frame(lapply(mydata, normalize))
 attach(maxmindf)
 
-#Training and Test Data
+#Training and Validation Data
 trainset <- maxmindf[1:160, ]
-testset <- maxmindf[161:200, ]
+valset <- maxmindf[161:200, ]
 
 #Neural Network
 library(neuralnet)
@@ -23,12 +23,12 @@ nn$result.matrix
 plot(nn)
 
 #Test the resulting output
-temp_test <- subset(testset, select = c("fcfps","earnings_growth", "de", "mcap", "current_ratio"))
+temp_test <- subset(valset, select = c("fcfps","earnings_growth", "de", "mcap", "current_ratio"))
 head(temp_test)
 nn.results <- compute(nn, temp_test)
 
 #Accuracy
-results <- data.frame(actual = testset$dividend, prediction = nn.results$net.result)
+results <- data.frame(actual = valset$dividend, prediction = nn.results$net.result)
 results
 roundedresults<-sapply(results,round,digits=0)
 roundedresultsdf=data.frame(roundedresults)
