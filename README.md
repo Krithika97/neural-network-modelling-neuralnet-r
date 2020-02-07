@@ -96,10 +96,10 @@ We now load the neuralnet library into R.
 
 Observe that we are:
 
-    Using neuralnet to "regress" the dependent "dividend" variable against the other independent variables
-    Setting the number of hidden layers to (2,1) based on the hidden=(2,1) formula
-    The linear.output variable is set to FALSE, given the impact of the independent variables on the dependent variable (dividend) is assumed to be non-linear
-    The threshold is set to 0.01, meaning that if the change in error during an iteration is less than 1%, then no further optimization will be carried out by the model
+- Using neuralnet to "regress" the dependent "dividend" variable against the other independent variables
+- Setting the number of hidden layers to (2,1) based on the hidden=(2,1) formula
+- The linear.output variable is set to FALSE, given the impact of the independent variables on the dependent variable (dividend) is assumed to be non-linear
+- The threshold is set to 0.01, meaning that if the change in error during an iteration is less than 1%, then no further optimization will be carried out by the model
 
 Deciding on the number of hidden layers in a neural network is not an exact science. In fact, there are instances where accuracy will likely be higher without any hidden layers. Therefore, trial and error plays a significant role in this process.
 
